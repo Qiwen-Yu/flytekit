@@ -235,11 +235,10 @@ def test_execute_python_workflow_dict_of_string_to_string(flyteclient, flyte_wor
 
 def test_execute_python_workflow_list_of_floats(flyteclient, flyte_workflows_register, flyte_remote_env):
     """Test execution of a @workflow-decorated python function and launchplan that are already registered."""
-    from mock_flyte_repo.workflows.basic.list_float_wf import concat_list, my_wf
+    from mock_flyte_repo.workflows.basic.list_float_wf import my_wf
 
     # make sure the task name is the same as the name used during registration
     my_wf._name = my_wf.name.replace("mock_flyte_repo.", "")
-    concat_list._name = concat_list.name.replace("mock_flyte_repo.", "")
 
     remote = FlyteRemote.from_config(PROJECT, "development")
     xs: typing.List[float] = [42.24, 999.1, 0.0001]
@@ -287,11 +286,10 @@ def test_execute_joblib_workflow(flyteclient, flyte_workflows_register, flyte_re
 
 
 def test_execute_with_default_launch_plan(flyteclient, flyte_workflows_register):
-    from mock_flyte_repo.workflows.basic.list_float_wf import concat_list, my_wf
+    from mock_flyte_repo.workflows.basic.list_float_wf import my_wf
 
     # make sure the task name is the same as the name used during registration
     my_wf._name = my_wf.name.replace("mock_flyte_repo.", "")
-    concat_list._name = concat_list.name.replace("mock_flyte_repo.", "")
 
     remote = FlyteRemote.from_config(PROJECT, "development")
     version = uuid.uuid4().hex[:30] + str(int(time.time()))
